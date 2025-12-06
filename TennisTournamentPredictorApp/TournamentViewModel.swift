@@ -3,7 +3,6 @@
 // Date: 12/03/2025
 // Description: This project creates an interface where the user can input tennis players and rank them against each other to see which ones perform the best.
 
-
 import Foundation
 import Combine
 import SwiftUI

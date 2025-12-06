@@ -17,3 +17,19 @@ struct TennisTournamentPredictorApp: App {
     }
 }
 
+struct RootView: View {
+    var body: some View {
+        TabView {
+            ContentView()
+                .tabItem {
+                    Label("Players", systemImage: "person.3")
+                }
+            
+            HistoryView()
+                .tabItem {
+                    Label("History", systemImage: "clock.arrow.circlepath")
+                }
+        }
+    }
+}
+

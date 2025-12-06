@@ -39,3 +39,26 @@ struct HistoryView: View {
         }
     }
 }
+
+
+struct SetDetailView: View {
+    let set: TournamentSet
+    
+    var body: some View {
+        List {
+            Section(header: Text("Info")) {
+                Text("Winner: \(set.winnerName)")
+                Text(set.createdAt.formatted(date: .long, time: .shortened))
+                    .foregroundColor(.gray)
+                    .font(.caption)
+            }
+            
+            Section(header: Text("Ranking")) {
+                ForEach(set.lines, id: \.self) { line in
+                    Text(line)
+                }
+            }
+        }
+        .navigationTitle(set.title)
+    }
+}

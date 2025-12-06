@@ -89,4 +89,60 @@ struct AddPlayerView: View {
     }
 }
 
+struct StatInputRow: View {
+    let title: String
+    @Binding var value: Int
+    
+    @State private var textValue: String = ""
+    @State private var lastValidText: String = ""
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            
+            Spacer()
+            
+            TextField("0-100", text: $textValue)
+                .frame(width: 60)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.numberPad)
+                .multilineTextAlignment(.center)
+                .onChange(of: textValue) {
+                    let newText = textValue
 
+                    if newText.isEmpty {
+                        return
+                    }
+
+                    if let num = Int(newText), (0...100).contains(num) {
+                        value = num
+                        lastValidText = newText
+                    } else {
+                        textValue = lastValidText
+                    }
+                }
+            
+            Button("-") {
+                if value > 0 {
+                    value -= 1
+                    textValue = String(value)
+                    lastValidText = textValue
+                }
+            }
+            .buttonStyle(.bordered)
+            
+            Button("+") {
+                if value < 100 {
+                    value += 1
+                    textValue = String(value)
+                    lastValidText = textValue
+                }
+            }
+            .buttonStyle(.bordered)
+        }
+        .onAppear {
+            textValue = String(value)
+            lastValidText = textValue
+        }
+    }
+}
